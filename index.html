@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gia</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f2f5;
+          }
+          
+          .heart {
+            width: 70px;
+            height: 70px;
+            background: #f20044;
+            position: absolute;
+            top: calc(50% - 35px); /* Center the heart vertically */
+            left: calc(50% - 35px); /* Center the heart horizontally */
+            transform: rotate(-45deg) scale(0.2); /* Initial size */
+            box-shadow: -10px 10px 90px #f20044;
+            animation: heart 1s linear infinite;
+            cursor: pointer; /* Add cursor pointer for indicating clickability */
+            z-index: 2; /* Ensure heart is in front of the letter */
+          }
+          
+          .heart:before,
+          .heart:after {
+            content: '';
+            position: absolute;
+            height: 70px;
+            width: 70px;
+            background: #f20044;
+            border-radius: 50px;
+          }
+          
+          .heart:before {
+            top: -50%;
+          }
+          
+          .heart:after {
+            right: -50%;
+          }
+          
+          .love-letter {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateY(-70px); /* Initially above the heart */
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #f20044;
+            border-radius: 10px;
+            z-index: 1; /* Ensure letter is behind the heart */
+          }
+          
+          @keyframes heart {
+            0% {
+              transform: rotate(-45deg) scale(0.2);
+            }
+            50% {
+              transform: rotate(-45deg) scale(0.3);
+            }
+            100% {
+              transform: rotate(-45deg) scale(0.2);
+            }
+          }
+          
+          @keyframes scrollLetter {
+            0% {
+              transform: translate(-50%, -50%) translateY(-70px); /* Initially above the heart */
+            }
+            100% {
+              transform: translate(-50%, -50%) translateY(0); /* Scrolls down to center */
+            }
+          }
+          
+          @keyframes moveWithLetter {
+            0% {
+              transform: translateY(0);
+            }
+            100% {
+              transform: translateY(50px);
+            }
+          }
+          
+    </style>
+</head>
+
+<body>
+    <div class="heart" id="heart"></div>
+    <div class="love-letter" id="love-letter">
+        <p>Dear Gianna Jane M. Robles,</p>
+      <p>
+        It has been eight months since our paths first crossed, I can't help but reflect on how grateful I am for that serendipitous algorithm that brought us together that day in OG. From the moment we met, you've shown me what it means to be truly remarkable. Your sweetness, your infectious sense of humor, your boundless capacity for love and care – they all make you one of the best people I've ever known. </p>
+        <p>You're not just sweet and funny, though. You're also incredibly strong, even if you and I sometimes call it being "maldita." But I see it differently; I see it as a testament to your resilience and your unwavering spirit. And when you talk about our friendship not lasting beyond this year, I can't help but disagree. I'm determined to prove to you that our bond is something special, something that will endure until our last breaths.</p>
+        <p> Gi, I want you to know how proud I am of you every single day. I admire the way you face your silent battles with grace and courage, from your academic challenges to the daily struggles of commuting. Your humility amidst it all is truly inspiring.</p>
+        <p>I'm wishing you all the best on this Valentine's Day and in all your undertakings, including any romantic ones you have (if may someone man gid). You deserve all the love and happiness in the world.</p>
+        <p>Happy Valenties and promise to God na hindi na gigising na ako kapag may rant ka, makikinig at dadamayan ka sa lahat.</p>
+
+        <p>Love you lots,
+            </p>
+           
+            <p>Regie</p>
+            <P>I have something for you, I know ayaw mo ng ginagastosan ka kaya eto virtual flowers. </P>
+      <!-- Button to go to flower.html -->
+      <button onclick="window.location.href = 'flower.html';">Paki Pindot</button>
+    </div>
+
+    <script>
+        document.getElementById('heart').addEventListener('click', function() {
+            var loveLetter = document.getElementById('love-letter');
+            var heart = document.getElementById('heart');
+            
+            // Toggle the display of the love letter
+            if (loveLetter.style.display === 'block') {
+              // If the love letter is visible, no action needed
+            } else {
+              // Show the love letter
+              loveLetter.style.display = 'block';
+              loveLetter.style.animation = 'scrollLetter 1s ease-in-out forwards';
+              heart.style.animation = 'moveWithLetter 1s ease-in-out forwards, heart 1s linear infinite'; // Move with letter and keep pulsating
+              
+              // Position the heart to align with the bottom center of the letter box
+              var letterRect = loveLetter.getBoundingClientRect();
+              var heartRect = heart.getBoundingClientRect();
+              var offsetX = (letterRect.width - heartRect.width) / 2; // Calculate horizontal offset
+              var offsetY = letterRect.height - heartRect.height; // Calculate vertical offset
+              heart.style.left = letterRect.left + offsetX + 'px';
+              heart.style.top = letterRect.top + offsetY + 'px';
+            }
+          });
+    </script>
+</body>
+</html>
